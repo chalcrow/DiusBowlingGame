@@ -9,6 +9,8 @@ public class DiusBowlingGame implements BowlingGame {
 
     public void roll (int noOfPins) {
 
+        System.console().writer().write("rolled " + noOfPins);
+
         doSpecialScoresForPreviousFrame(noOfPins);
 
         getCurrentFrame().frameScore += noOfPins;
@@ -91,33 +93,56 @@ public class DiusBowlingGame implements BowlingGame {
     public void simulateGame() {
         //Frame 1- strike
         roll(10);
+        displayScore();
         //Frame2
         roll(3);
+        displayScore();
         roll(0);
+        displayScore();
         //Frame3
         roll(0);
+        displayScore();
         roll(5);
+        displayScore();
         //Frame 4 - spare
         roll(4);
+        displayScore();
         roll(6);
+        displayScore();
         //Frame 5
         roll(2);
+        displayScore();
         roll(6);
+        displayScore();
         //Frame 6 - spare
         roll(5);
+        displayScore();
         roll(5);
+        displayScore();
         //Frame 6 - strike
         roll(10);
+        displayScore();
         //Frame 7 - strike
         roll(10);
+        displayScore();
         //Frame 8 - spare
         roll(2);
+        displayScore();
         roll(8);
+        displayScore();
         //Frame 9 -spare
         roll(0);
+        displayScore();
         roll(10);
+        displayScore();
         //Frame 10 - wipeout
         roll(0);
+        displayScore();
         roll(0);
+        displayScore();
+    }
+
+    private void displayScore() {
+        System.console().writer().write(score());
     }
 }
