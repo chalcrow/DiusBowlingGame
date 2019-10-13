@@ -33,5 +33,8 @@ class DiusBowlingGameTest {
     void firstRollShouldScoreThePinNumber() throws Exception {
         bowlingGame.roll(0);
         assertEquals(0, bowlingGame.score());
+
+        bowlingGame.roll(1);
+        assertEquals(1, bowlingGame.score());
     }
 }
