@@ -1,4 +1,4 @@
-package main.java.com.dius.bowling;
+package com.dius.bowling;
 
 /**
  * Interface for a bowling game.

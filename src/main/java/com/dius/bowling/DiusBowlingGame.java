@@ -1,34 +1,40 @@
-package main.java.com.dius.bowling;
+package com.dius.bowling;
 import java.util.*;
 
-import static main.java.com.dius.bowling.Constants.*;
+import static com.dius.bowling.Constants.*;
 
+/**
+ * Scoring system for tenpin bowls
+ */
 public class DiusBowlingGame implements BowlingGame {
 
     ArrayList<BowlingFrame> gameFrames = new ArrayList<BowlingFrame>();
 
     public void roll (int noOfPins) {
 
-        System.console().writer().write("rolled " + noOfPins);
+        System.out.println("frame" + getCurrentFrameNo() + ", rolled " + noOfPins);
 
         doSpecialScoresForPreviousFrame(noOfPins);
 
         getCurrentFrame().frameScore += noOfPins;
 
         if (isFirstRollOfFrame()) {
+            getCurrentFrame().roll1 = new Roll();
             getCurrentFrame().roll1.pinsKnockedDown = noOfPins;
-            getCurrentFrame().frameScore += noOfPins;
             // a strike can only occur on the 1st roll - we need to check if this is a strike
             getCurrentFrame().roll1.isStrike = this.isStrike(noOfPins);
+            displayScore();
             if (this.isStrike(noOfPins)) {
                 advanceFrame();
             }
         }
         else {
             // this is the 2nd roll
+            getCurrentFrame().roll2 = new Roll();
             getCurrentFrame().roll2.pinsKnockedDown = noOfPins;
             // a spare can only occur on the 2nd roll - we need to check if this is a spare
             getCurrentFrame().roll2.isSpare = this.isSpare(noOfPins);
+            displayScore();
 
             advanceFrame();
         }
@@ -49,7 +55,12 @@ public class DiusBowlingGame implements BowlingGame {
     }
 
     public BowlingFrame getCurrentFrame() {
-        return gameFrames.get(gameFrames.size() - 1);
+        BowlingFrame currentFrame = gameFrames.get(gameFrames.size() - 1);
+        return currentFrame;
+    }
+
+    private int getCurrentFrameNo() {
+        return gameFrames.size();
     }
 
     public BowlingFrame getPreviousFrame() {
@@ -68,7 +79,14 @@ public class DiusBowlingGame implements BowlingGame {
         return noOfPins == pinsPerFrame;
     }
 
-    void advanceFrame() {
+    /**
+     * Activate the 1st frame of the game
+     */
+    public void startGame() {
+        advanceFrame();
+    };
+
+    public void advanceFrame() {
         if (gameFrames.size() < framesPerGame) {
             BowlingFrame newFrame = new BowlingFrame();
             gameFrames.add(newFrame);
@@ -83,7 +101,7 @@ public class DiusBowlingGame implements BowlingGame {
     public int score() {
         int totalGameScore = 0;
 
-        for (int i=0; i <= gameFrames.size(); i++) {
+        for (int i=0; i <= gameFrames.size() - 1; i++) {
             totalGameScore += gameFrames.get(i).frameScore;
         }
 
@@ -93,56 +111,34 @@ public class DiusBowlingGame implements BowlingGame {
     public void simulateGame() {
         //Frame 1- strike
         roll(10);
-        displayScore();
         //Frame2
         roll(3);
-        displayScore();
         roll(0);
-        displayScore();
-        //Frame3
+        //Frame3 - wipeout
         roll(0);
-        displayScore();
-        roll(5);
-        displayScore();
+        roll(0);
         //Frame 4 - spare
         roll(4);
-        displayScore();
         roll(6);
-        displayScore();
         //Frame 5
         roll(2);
-        displayScore();
         roll(6);
-        displayScore();
         //Frame 6 - spare
         roll(5);
-        displayScore();
         roll(5);
-        displayScore();
-        //Frame 6 - strike
-        roll(10);
-        displayScore();
         //Frame 7 - strike
         roll(10);
-        displayScore();
-        //Frame 8 - spare
-        roll(2);
-        displayScore();
-        roll(8);
-        displayScore();
-        //Frame 9 -spare
-        roll(0);
-        displayScore();
+        //Frame 8 - strike
         roll(10);
-        displayScore();
-        //Frame 10 - wipeout
+        //Frame 9 - spare
+        roll(2);
+        roll(8);
+        //Frame 10 -spare
         roll(0);
-        displayScore();
-        roll(0);
-        displayScore();
+        roll(10);
     }
 
     private void displayScore() {
-        System.console().writer().write(score());
+        System.out.println("Total score - " + score());
     }
 }

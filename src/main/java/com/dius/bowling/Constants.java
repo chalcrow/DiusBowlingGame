@@ -1,4 +1,4 @@
-package main.java.com.dius.bowling;
+package com.dius.bowling;
 
 public final class Constants {
     public static final int pinsPerFrame = 10;
