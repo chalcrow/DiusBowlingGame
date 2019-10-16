@@ -1,6 +1,5 @@
 package com.dius.bowling;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +13,6 @@ class DiusBowlingGameTest {
     void setUp() {
         this.bowlingGame = new DiusBowlingGame();
         this.bowlingGame.startGame();
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
     @Test
@@ -63,6 +58,4 @@ class DiusBowlingGameTest {
         bowlingGame.roll(3);
         assertEquals(28, bowlingGame.score());
     }
-
-
 }

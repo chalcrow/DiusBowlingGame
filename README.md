@@ -1,0 +1,1 @@
+Tenpin bowling scoring program written in Java.Written using IntelliJ IDEA. To run, run the Main class located in src/main/java/, com.dius.bowling package. When run, the program simulates a bowling game and will write the scoring output to the console.
