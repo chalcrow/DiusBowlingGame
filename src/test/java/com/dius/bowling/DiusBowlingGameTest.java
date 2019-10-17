@@ -58,4 +58,14 @@ class DiusBowlingGameTest {
         bowlingGame.roll(3);
         assertEquals(28, bowlingGame.score());
     }
+
+    @Test
+    void invalidRollInputIsHandled() throws Exception {
+        try{
+            bowlingGame.roll('A');
+        }
+        catch(Exception e){
+            fail("Should not have thrown any exception");
+        }
+    }
 }
